@@ -14,8 +14,8 @@ class CreateUpdateUsers3Table extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->unique()->nullalbe()->change();
-            $table->string('email')->unique()->nullalbe()->change();
+            $table->string('phone')->nullalbe()->change();
+            $table->string('email')->nullalbe()->change();
         });
     }
 
