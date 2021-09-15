@@ -15,12 +15,13 @@ use Laravel\Socialite\Contracts\Factory as Socialite;
 
 class UserController extends Controller
 {
+    public function __construct(Socialite $socialite)
+    {
+        $this->socialite = $socialite;
+    }
+
     public function login(Request $request)
     {
-        public function __construct(Socialite $socialite){
-           $this->socialite = $socialite;
-       }
-
         if ($request) {
             $input = $request->only('phone', 'password');
             $input['role_id'] = 1;
