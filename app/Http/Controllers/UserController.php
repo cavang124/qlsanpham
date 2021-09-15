@@ -162,11 +162,7 @@ class UserController extends Controller
 
     public function loginFacebook()
     {
-        
-            return Socialite::drive('facebook')->redirect();
-       
-
-     
+        return $this->socialite->with('facebook')->redirect();
     }
 
     public function loginFacebookCallback()
