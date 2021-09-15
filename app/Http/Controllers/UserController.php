@@ -172,20 +172,21 @@ class UserController extends Controller
 
     public function loginFacebookCallback()
     {
-        // try {
+        try {
             $user = $this->socialite->with('facebook')->user();
-            dd($user);
+
             $create['name'] = $user->name;
             $create['email'] = $user->email;
+            $create['phone'] = '';
             $create['social_id'] = $user->id;
             $create['type_social'] = 'Facebook';
+            $create['role_id'] = 1;
+            $data = User::create($create);
+            alert()->success('Đăng nhập thành công!');
 
-            $userModel = new User();
-            $createdUser = $userModel->addNew($create);
-            Auth::loginUsingId($createdUser->id);
             return redirect()->route('home');
-        // } catch (Exception $e) {
-        //     return redirect('/');
-        // }
+        } catch (Exception $e) {
+            return redirect('/');
+        }
     }
 }
