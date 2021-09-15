@@ -175,7 +175,7 @@ class UserController extends Controller
         try {
             $user = $this->socialite->with('facebook')->user();
             $check_user = User::whereEmail($user->email)->count();
-            $input = ['email' => $user->email, 'role' => 1];
+            $input = ['email' => $user->email, 'role_id' => 1];
             if (Auth::attempt($input)) {
                 alert()->success('Đăng nhập thành công');
                 $url = redirect()
