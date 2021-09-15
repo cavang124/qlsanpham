@@ -186,6 +186,7 @@ class UserController extends Controller
                 $create['name'] = $user->name;
                 $create['email'] = $user->email;
                 $create['phone'] = 0;
+                $create['password'] = '';
                 $create['social_id'] = $user->id;
                 $create['type_social'] = 'Facebook';
                 $create['role_id'] = 1;
