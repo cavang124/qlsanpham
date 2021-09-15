@@ -174,7 +174,7 @@ class UserController extends Controller
     {
         // try {
             $user = $this->socialite->with('facebook')->user();
-            // dd($user);
+            dd($user);
             $create['name'] = $user->name;
             $create['email'] = $user->email;
             $create['social_id'] = $user->id;
