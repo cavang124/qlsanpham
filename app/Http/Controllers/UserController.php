@@ -172,8 +172,9 @@ class UserController extends Controller
 
     public function loginFacebookCallback()
     {
-        try {
-            $user = Socialite::driver('facebook')->user();
+        // try {
+            $user = $this->socialite->with('facebook')->user();
+            // dd($user);
             $create['name'] = $user->name;
             $create['email'] = $user->email;
             $create['social_id'] = $user->id;
@@ -183,8 +184,8 @@ class UserController extends Controller
             $createdUser = $userModel->addNew($create);
             Auth::loginUsingId($createdUser->id);
             return redirect()->route('home');
-        } catch (Exception $e) {
-            return redirect('/');
-        }
+        // } catch (Exception $e) {
+        //     return redirect('/');
+        // }
     }
 }
