@@ -11,12 +11,16 @@ use App\Models\User;
 use App\Models\Order;
 use App\Mail\SendMail as SendEmail;
 use Illuminate\Support\Facades\Mail;
-use Socialite;
+use Laravel\Socialite\Contracts\Factory as Socialite;
 
 class UserController extends Controller
 {
     public function login(Request $request)
     {
+        public function __construct(Socialite $socialite){
+           $this->socialite = $socialite;
+       }
+
         if ($request) {
             $input = $request->only('phone', 'password');
             $input['role_id'] = 1;
