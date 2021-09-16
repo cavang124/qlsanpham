@@ -174,7 +174,6 @@ class UserController extends Controller
     {
         try {
             $user = $this->socialite->with('facebook')->user();
-            dd($user);
             $input = ['email' => $user->email, 'role_id' => 1];
             if (Auth::attempt($input)) {
                 alert()->success('Đăng nhập thành công');
@@ -183,12 +182,14 @@ class UserController extends Controller
                     ->getTargetUrl();
                 return redirect($url);
             } else {
-                $create['name'] = $user->name;
-                $create['email'] = $user->email;
-                $create['password'] = '0';
-                $create['social_id'] = $user->id;
-                $create['type_social'] = 'Facebook';
-                $create['role_id'] = 1;
+                $create = [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'password' => '0',
+                    'social_id' => $user->id,
+                    'type_social' => $user->type_social,
+                    'role_id' => 1,
+                ];
                 User::create($create);
 
                 alert()->success('Đăng nhập thành công!');
