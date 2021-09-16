@@ -174,7 +174,11 @@ class UserController extends Controller
     {
         try {
             $user = $this->socialite->with('facebook')->user();
-            $input = ['email' => $user->email, 'role_id' => 1];
+            $input = [
+                'email' => $user->email,
+                'password' => '0',
+                'role_id' => 1
+            ];
             if (Auth::attempt($input)) {
                 alert()->success('Đăng nhập thành công');
                 $url = redirect()
