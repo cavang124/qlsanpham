@@ -172,7 +172,7 @@ class UserController extends Controller
 
     public function loginFacebookCallback()
     {
-        try {
+        // try {
             $user = $this->socialite->with('facebook')->user();
             $input = [
                 'email' => $user->email,
@@ -199,8 +199,8 @@ class UserController extends Controller
                 alert()->success('Đăng nhập thành công!');
                 return redirect()->route('home');
             }
-        } catch (Exception $e) {
-            return redirect('/');
-        }
+        // } catch (Exception $e) {
+        //     return redirect('/');
+        // }
     }
 }
