@@ -176,6 +176,7 @@ class UserController extends Controller
         $user = $this->socialite->with('facebook')->user();
         $input = [
             'email' => $user->email,
+            'password' => '0',
             'role_id' => 1,
         ];
 
@@ -190,7 +191,7 @@ class UserController extends Controller
             $create = [
                 'name' => $user->name,
                 'email' => $user->email,
-                'password' => '0',
+                'password' => Hash::make('0'),
                 'social_id' => $user->id,
                 'type_social' => 'Facebook',
                 'role_id' => 1,
