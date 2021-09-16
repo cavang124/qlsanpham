@@ -191,7 +191,7 @@ class UserController extends Controller
                     'email' => $user->email,
                     'password' => '0',
                     'social_id' => $user->id,
-                    'type_social' => $user->type_social,
+                    'type_social' => 'Facebook',
                     'role_id' => 1,
                 ];
                 User::create($create);
