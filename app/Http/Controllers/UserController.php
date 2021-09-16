@@ -176,19 +176,17 @@ class UserController extends Controller
         $user = $this->socialite->with('facebook')->user();
         $input = [
             'email' => $user->email,
-            'password' => '0',
             'role_id' => 1,
         ];
-        dd($input);
+
         if (Auth::attempt($input)) {
-            dd(1);
             alert()->success('Đăng nhập thành công');
             $url = redirect()
                 ->route('home')
                 ->getTargetUrl();
             return redirect($url);
         } else {
-            dd(2);
+           
             $create = [
                 'name' => $user->name,
                 'email' => $user->email,
@@ -199,11 +197,13 @@ class UserController extends Controller
             ];
             User::create($create);
 
-            alert()->success('Đăng nhập thành công');
-            $url = redirect()
-                ->route('home')
-                ->getTargetUrl();
-            return redirect($url);
+            if (Auth::attempt($input)) {
+                alert()->success('Đăng nhập thành công');
+                $url = redirect()
+                    ->route('home')
+                    ->getTargetUrl();
+                return redirect($url);
+            }
         }
         // } catch (Exception $e) {
         //     return redirect('/');
