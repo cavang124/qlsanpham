@@ -173,32 +173,37 @@ class UserController extends Controller
     public function loginFacebookCallback()
     {
         // try {
-            $user = $this->socialite->with('facebook')->user();
-            $input = [
+        $user = $this->socialite->with('facebook')->user();
+        $input = [
+            'email' => $user->email,
+            'password' => '0',
+            'role_id' => 1,
+        ];
+        if (Auth::attempt($input)) {
+            dd(1);
+            alert()->success('Đăng nhập thành công');
+            $url = redirect()
+                ->route('home')
+                ->getTargetUrl();
+            return redirect($url);
+        } else {
+            dd(2);
+            $create = [
+                'name' => $user->name,
                 'email' => $user->email,
                 'password' => '0',
-                'role_id' => 1
+                'social_id' => $user->id,
+                'type_social' => 'Facebook',
+                'role_id' => 1,
             ];
-            if (Auth::attempt($input)) {
-                alert()->success('Đăng nhập thành công');
-                $url = redirect()
-                    ->route('home')
-                    ->getTargetUrl();
-                return redirect($url);
-            } else {
-                $create = [
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'password' => '0',
-                    'social_id' => $user->id,
-                    'type_social' => 'Facebook',
-                    'role_id' => 1,
-                ];
-                User::create($create);
+            User::create($create);
 
-                alert()->success('Đăng nhập thành công!');
-                return redirect()->route('home');
-            }
+            alert()->success('Đăng nhập thành công');
+            $url = redirect()
+                ->route('home')
+                ->getTargetUrl();
+            return redirect($url);
+        }
         // } catch (Exception $e) {
         //     return redirect('/');
         // }
