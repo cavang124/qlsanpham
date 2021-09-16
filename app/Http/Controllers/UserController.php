@@ -184,7 +184,7 @@ class UserController extends Controller
             } else {
                 $create['name'] = $user->name;
                 $create['email'] = $user->email;
-                $create['password'] = 0;
+                $create['password'] = '0';
                 $create['social_id'] = $user->id;
                 $create['type_social'] = 'Facebook';
                 $create['role_id'] = 1;
