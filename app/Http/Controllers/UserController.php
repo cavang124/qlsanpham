@@ -179,6 +179,7 @@ class UserController extends Controller
             'password' => '0',
             'role_id' => 1,
         ];
+        dd($input);
         if (Auth::attempt($input)) {
             dd(1);
             alert()->success('Đăng nhập thành công');
