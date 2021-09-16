@@ -174,6 +174,7 @@ class UserController extends Controller
     {
         try {
             $user = $this->socialite->with('facebook')->user();
+            dd($user);
             $input = ['email' => $user->email, 'role_id' => 1];
             if (Auth::attempt($input)) {
                 alert()->success('Đăng nhập thành công');
