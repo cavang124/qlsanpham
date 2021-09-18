@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->integer('number');
-            $table->dateTime('date_expired');
+            $table->dateTime('date_expired')->nullalbe();
             $table->timestamps();
         });
     }
