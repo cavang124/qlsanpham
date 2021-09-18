@@ -15,12 +15,12 @@ class DashboardController extends Controller
         $total_money = Order::sum('total_money');
         $order = Order::count();
         $product = Product::count();
-        
-        $hot = Product::leftJoin('detail_order','products.id','=','detail_order.product_id')
-            ->selectRaw('products.*, sum(detail_order.number) as total')
-            // ->groupBy('detail_order.product_id')
-            ->orderBy('total', 'desc')
-            ->take(3)->get();        
+        $hot = Product::get();
+        // $hot = Product::leftJoin('detail_order','products.id','=','detail_order.product_id')
+        //     ->selectRaw('products.*, sum(detail_order.number) as total')
+        //     ->groupBy('detail_order.product_id')
+        //     ->orderBy('total', 'desc')
+        //     ->take(3)->get();        
         return view('include.admin.dashboard.index', compact('total_money', 'order', 'product', 'hot'));
     }
 }
