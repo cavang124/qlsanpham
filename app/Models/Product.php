@@ -31,7 +31,7 @@ class Product extends Model
     public function getImageAttribute($image)
     {
         if ($image == null) {
-            return null;
+            return asset('img/sunset.png');
         }
         return asset($image);
     }
