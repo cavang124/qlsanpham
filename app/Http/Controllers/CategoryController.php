@@ -51,12 +51,7 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        $product = Product::whereCategoryId($id)->count();
-        if($product>0){
-            alert()->success('Danh mục chứa sản phẩm!');
-        return redirect()->back();
-        }
-        $delete = Category::where('id', $id)->delete();
+        Category::where('id', $id)->delete();
         alert()->success('Xóa danh mục thành công!');
         return redirect()->back();
     }
