@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $where[] = ['role', 2];
+        $where[] = ['role_id', 2];
         if ($request->name) {
             $where[] = ['name', 'like', '%' . $request->name . '%'];
         }
