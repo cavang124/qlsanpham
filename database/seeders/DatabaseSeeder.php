@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dưa hấu',
             'image' => '',
             'category_id' => '1',
-            'price' => '30000'
+            'price' => '30000',
+            'number' => 10,
         ];
         Product::create($newProduct);
 
