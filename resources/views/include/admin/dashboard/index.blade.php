@@ -39,8 +39,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Doanh thu mua hàng theo tháng</div>
-                                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($dashboard['ctv']['revuene_month'])}} VNĐ</div> --}}
+                                                Doanh thu mua hàng</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($total_money)}} VNĐ</div>
                                         </div>
                                         
                                     </div>
@@ -55,8 +55,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Số Gói sữa đã mua theo tháng</div>
-                                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{$dashboard['ctv']['quantity_packet_month']}}</div> --}}
+                                                Số đơn hàng</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{$order}} đơn hàng</div>
                                         </div>
                                         
                                     </div>
@@ -70,12 +70,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng doanh thu cây hệ thống
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng số sản phẩm
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    {{-- <div class=" mb-0 font-weight-bold text-gray-800">-Tháng: {{number_format($dashboard['ctv']['revenue_ctv_month'])}} VNĐ</div>
-                                                    <div class="mb-0  font-weight-bold text-gray-800">-Ngày: {{number_format($dashboard['ctv']['revenue_ctv_day'])}} VNĐ</div> --}}
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{$product}} sản phẩm</div>
                                                 </div>
                                                 
                                             </div>
@@ -86,22 +85,49 @@
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Tổng số thành viên cấp dưới</div>
-                                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{$dashboard['ctv']['quantity_ctv_total']}}</div> --}}
+                    </div>
+                    <h2>Sản phẩm hot:</h2>
+                    <div class="row" id="document">
+                        @foreach ($hot as $item)
+        
+                            @php
+                                $id = $item['id'];
+                            @endphp
+                            <div class="col-lg-4 clo-md-4">
+                                <div class="card border-left-primary shadow text-center py-2 " style="margin:15px 10px;">
+                                    <a href="{{ asset('chi-tiet-san-pham/id=' . $id) }}" class="image_hover"><img
+                                            src="{{ $item['image'] }}" alt="" style="height: 210px;
+                                                            width: 160px; object-fit:contain; transition: width 2s, height 2s"
+                                            class="mt-1 "></a>
+                                    <div>
+                                        <a href="{{ asset('chi-tiet-san-pham/id=' . $id) }}">
+                                            <p style="padding-top: 10px; font-weight: bold; color:#000; height:50px">
+                                                {!! $item['name'] !!}</p>
+        
+                                        </a>
+                                        <div class="text-center">
+                                            <p>Giá:
+                                                @if ($item['price_sale'] == null)
+                                                    <b>{{ number_format($item['price']) }} đ</b>
+        
+                                                @else <strike>{{ number_format($item['price']) }} đ </strike>
+                                                    <b> {{ number_format($item['price_sale']) }} đ </b>
+                                                @endif
+                                            </p>
                                         </div>
-                                       
+                                        <div class="text-center pb-3">
+                                            <p>Số lần đặt hàng: {{ $item['total']}}</p>
+                                           
+                                        </div>
+        
                                     </div>
+        
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+        
                     </div>
+                    
                 </div>
 
             </div>

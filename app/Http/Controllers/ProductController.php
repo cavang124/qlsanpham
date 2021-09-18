@@ -22,7 +22,7 @@ class ProductController extends Controller
             ->paginate(5);
         $category = Category::all();
 
-        return view('include.product.index', compact('listProduct', 'category'));
+        return view('include.admin.product.index', compact('listProduct', 'category'));
     }
 
     public function store(Request $request)
@@ -35,13 +35,17 @@ class ProductController extends Controller
                 'price' => 'required',
                 'code' => 'required|unique:products',
                 'category_id' => 'required',
+                'number' => 'required',
+                'date_expired' => 'required',
             ],
             [
                 'name.required' => 'Vui lòng nhập tên sản phẩm',
                 'price.required' => 'Vui lòng nhập giá sản phẩm',
                 'code.required' => 'Vui lòng nhập mã code sản phẩm',
                 'code.unique' => 'Mã code sản phẩm đã tồn tại',
-                'category_id' => 'Vui lòng chọn danh mục',
+                'category_id.required' => 'Vui lòng chọn danh mục',
+                'number.required' => 'Vui lòng nhập số lượng sản phẩm',
+                'date_expired.required' => 'Vui lòng nhập ngày hết hạn'
             ],
         );
 
@@ -69,12 +73,18 @@ class ProductController extends Controller
             [
                 'name' => 'required',
                 'price' => 'required',
+               
                 'category_id' => 'required',
+                'number' => 'required',
+                'date_expired' => 'required',
             ],
             [
                 'name.required' => 'Vui lòng nhập tên sản phẩm',
                 'price.required' => 'Vui lòng nhập giá sản phẩm',
-                'category_id' => 'Vui lòng chọn danh mục',
+               
+                'category_id.required' => 'Vui lòng chọn danh mục',
+                'number.required' => 'Vui lòng nhập số lượng sản phẩm',
+                'date_expired.required' => 'Vui lòng nhập ngày hết hạn'
             ],
         );
 
@@ -83,7 +93,7 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        $req = $request->all();
+        $req = $request->except('code');
         $data = Product::findorfail($id);
 
         if ($request->file('image') != null) {

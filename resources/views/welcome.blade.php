@@ -66,7 +66,7 @@
                                     <div class="text-center">
                                         <div class="small">Bạn muốn đăng nhập với: 
                                             <a href="{{ route('loginFacebook')}}" class="mr-2"><i class="fab fa-facebook-square fa-3x"></i></a>
-                                            <a href=""><i class="fab fa-google-plus-square fa-3x"></i></a>
+                                            {{-- <a href=""><i class="fab fa-google-plus-square fa-3x"></i></a> --}}
                                         </div>
 
                                         

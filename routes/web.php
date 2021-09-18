@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,14 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('form-dang-nhap');
 
-
 Route::post('/dang-nhap', [UserController::class, 'login'])->name('login');
 Route::get('/dang-nhap/facebook', [UserController::class, 'loginFacebook'])->name('loginFacebook');
 Route::get('/dang-nhap/facebook/callback', [UserController::class, 'loginFacebookCallback'])->name('loginFacebookCallback');
 
 Route::group(['middleware' => ['auth']], function () {
     // Route::get('/home', 'CategoryController@index')->name('home');
-    Route::view('/trang-chu', 'include.dashboard.index')->name('home');
+    Route::get('/trang-chu', [DashboardController::class, 'index'])->name('home');
     Route::get('/dang-xuat', [UserController::class, 'logout'])->name('logout');
 
     Route::prefix('danh-muc')
@@ -72,3 +71,5 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::resource('category', 'CategoryController');
 
 });
+
+

@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->integer('status')->default(1);
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('number');
+            $table->dateTime('date_expired');
             $table->timestamps();
         });
     }

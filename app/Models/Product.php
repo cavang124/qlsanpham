@@ -18,7 +18,9 @@ class Product extends Model
         'image',
         'category_id',
         'price',
-        'status'
+        'status',
+        'number',
+        'date_expired',
     ];
 
     public function category()
@@ -32,5 +34,9 @@ class Product extends Model
             return null;
         }
         return asset($image);
+    }
+
+    public function getDateExpiredAttribute($date_expired){
+       return date('d-m-Y', strtotime($date_expired));
     }
 }

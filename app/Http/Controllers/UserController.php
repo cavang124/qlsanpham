@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $where = [];
+        $where[] = ['role', 2];
         if ($request->name) {
             $where[] = ['name', 'like', '%' . $request->name . '%'];
         }
@@ -70,7 +70,7 @@ class UserController extends Controller
         $listUser = User::where($where)
             ->orderby('id', 'desc')
             ->paginate(12);
-        return view('include.user.index', compact('listUser'));
+        return view('include.admin.user.index', compact('listUser'));
     }
 
     public function store(Request $request)

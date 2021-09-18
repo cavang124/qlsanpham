@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $category = Category::get();
-        return view('include.category.index', compact('category'));
+        return view('include.admin.category.index', compact('category'));
     }
 
 
@@ -51,6 +51,7 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
+        $product = Product::whereCategoryId($id)->get();
         $delete = Category::where('id', $id)->delete();
         alert()->success('Xóa danh mục thành công!');
         return redirect()->back();
