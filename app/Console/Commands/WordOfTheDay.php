@@ -45,6 +45,10 @@ class WordOfTheDay extends Command
                 $item->update([
                     'status' => 3,
                 ]);
+            }else if($date_expired ? $date && $item['status'] == 3){
+                $item->update([
+                    'status' => 1,
+                ]);
             }
 
         }
